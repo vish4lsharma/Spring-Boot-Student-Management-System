@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Tag(name = "Student Controller", description = "APIs for managing students")
 public class StudentController {
@@ -24,9 +25,11 @@ public class StudentController {
 
     @Operation(summary = "Create a new student")
     @PostMapping
-    public ResponseEntity<ApiResponse<StudentResponseDTO>> createStudent(@Valid @RequestBody StudentRequestDTO requestDTO) {
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> createStudent(
+            @Valid @RequestBody StudentRequestDTO requestDTO) {
         StudentResponseDTO createdStudent = studentService.createStudent(requestDTO);
-        ApiResponse<StudentResponseDTO> response = new ApiResponse<>(true, "Student created successfully", createdStudent);
+        ApiResponse<StudentResponseDTO> response = new ApiResponse<>(true, "Student created successfully",
+                createdStudent);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -34,7 +37,8 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getAllStudents() {
         List<StudentResponseDTO> students = studentService.getAllStudents();
-        ApiResponse<List<StudentResponseDTO>> response = new ApiResponse<>(true, "Students retrieved successfully", students);
+        ApiResponse<List<StudentResponseDTO>> response = new ApiResponse<>(true, "Students retrieved successfully",
+                students);
         return ResponseEntity.ok(response);
     }
 
@@ -48,9 +52,11 @@ public class StudentController {
 
     @Operation(summary = "Update an existing student by ID")
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<StudentResponseDTO>> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentRequestDTO requestDTO) {
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> updateStudent(@PathVariable Long id,
+            @Valid @RequestBody StudentRequestDTO requestDTO) {
         StudentResponseDTO updatedStudent = studentService.updateStudent(id, requestDTO);
-        ApiResponse<StudentResponseDTO> response = new ApiResponse<>(true, "Student updated successfully", updatedStudent);
+        ApiResponse<StudentResponseDTO> response = new ApiResponse<>(true, "Student updated successfully",
+                updatedStudent);
         return ResponseEntity.ok(response);
     }
 

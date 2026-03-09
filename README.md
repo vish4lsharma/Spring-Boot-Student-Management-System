@@ -155,8 +155,6 @@ You can test the APIs using:
 * Full Stack Developer
 * Interested in Software Engineering and Backend Development
 
-GitHub: https://github.com/your-username
-
 ---
 
 ⭐ If you like this project, please consider giving it a **star** on GitHub!

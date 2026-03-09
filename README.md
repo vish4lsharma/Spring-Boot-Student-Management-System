@@ -1,160 +1,84 @@
-# 🎓 Spring Boot Student Management System
+# Spring Boot Student Management System
 
-A **Student Management System** built using **Spring Boot, Spring Data JPA, and MySQL** that allows users to manage student records efficiently.
-The application provides functionality to **create, view, update, and delete student information** through a RESTful API.
+A production-ready REST API for managing students, built with Java, Spring Boot, Spring Data JPA, and MySQL.
 
-This project demonstrates the implementation of **backend development using Spring Boot** with a clean architecture and proper API design.
+## Features
 
----
+- Clean layered architecture (Controller, Service, Repository, Entity, DTO, Config)
+- Complete CRUD operations for Students
+- Jakarta validation limits data corruption
+- Centralized exception handling with `@ControllerAdvice`
+- Swagger / OpenAPI documentation
+- SLF4J logging integration
 
-## 🚀 Features
+## Prerequisites
 
-* Add new student records
-* View all students
-* View a student by ID
-* Update student information
-* Delete student records
-* RESTful API architecture
-* MySQL database integration
-* Spring Data JPA for ORM
-* Exception handling
-* Clean and modular project structure
+- Java 17
+- Maven 3.6+
+- MySQL 8.0+
 
----
+## Database Configuration
 
-## 🛠️ Tech Stack
-
-* **Backend:** Spring Boot
-* **Language:** Java
-* **Frameworks:** Spring Web, Spring Data JPA
-* **Database:** MySQL
-* **Build Tool:** Maven
-* **API Testing:** Postman
-* **Version Control:** Git & GitHub
-
----
-
-## 📂 Project Structure
-
-```
-Spring-Boot-Student-Management-System
-│
-├── src
-│   ├── main
-│   │   ├── java/com/example/studentmanagement
-│   │   │   ├── controller
-│   │   │   │   └── StudentController.java
-│   │   │   ├── service
-│   │   │   │   └── StudentService.java
-│   │   │   ├── repository
-│   │   │   │   └── StudentRepository.java
-│   │   │   ├── model
-│   │   │   │   └── Student.java
-│   │   │   └── StudentManagementApplication.java
-│   │
-│   └── resources
-│       └── application.properties
-│
-└── pom.xml
-```
-
----
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/your-username/Spring-Boot-Student-Management-System.git
-```
-
-### 2️⃣ Navigate to the project directory
-
-```bash
-cd Spring-Boot-Student-Management-System
-```
-
-### 3️⃣ Configure MySQL Database
-
-Update the **application.properties** file:
+Update the `src/main/resources/application.properties` file with your MySQL credentials:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/student_db
+spring.datasource.url=jdbc:mysql://localhost:3306/studentdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
 spring.datasource.username=root
-spring.datasource.password=yourpassword
+spring.datasource.password=root
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 ```
 
-### 4️⃣ Run the application
+> Ensure you have an empty schema created in MySQL named `studentdb` before running the application.
 
-Using Maven:
-
-```bash
-mvn spring-boot:run
+```sql
+CREATE DATABASE studentdb;
 ```
 
-Or run the main class:
+## How to Run the Project
 
-```
-StudentManagementApplication.java
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/vish4lsharma/Spring-Boot-Student-Management-System.git
+   cd Spring-Boot-Student-Management-System
+   ```
+2. **Build the project:**
+   ```bash
+   mvn clean install
+   ```
+3. **Run the project:**
+   ```bash
+   mvn spring-boot:run
+   ```
 
----
+The application will start on port `8080`.
 
-## 🔌 API Endpoints
+## API Endpoints
 
-| Method | Endpoint       | Description       |
-| ------ | -------------- | ----------------- |
-| GET    | /students      | Get all students  |
-| GET    | /students/{id} | Get student by ID |
-| POST   | /students      | Add new student   |
-| PUT    | /students/{id} | Update student    |
-| DELETE | /students/{id} | Delete student    |
+### Student Endpoints
 
----
+| Method | URL                  | Description          |
+|--------|----------------------|----------------------|
+| POST   | `/api/students`      | Create a new student |
+| GET    | `/api/students`      | Get all students     |
+| GET    | `/api/students/{id}` | Get a student by ID  |
+| PUT    | `/api/students/{id}` | Update a student     |
+| DELETE | `/api/students/{id}` | Delete a student     |
 
-## 📬 Example Request (POST)
-
+**Standard API Response Structure:**
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
-  "course": "Computer Science"
+  "success": true,
+  "message": "Action completed successfully",
+  "data": { ... }
 }
 ```
 
----
+## Swagger UI Documentation
 
-## 🧪 Testing
+Access the Swagger UI at:
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-You can test the APIs using:
-
-* Postman
-* Thunder Client
-* cURL
-
----
-
-## 📌 Future Improvements
-
-* Add frontend using **React or Angular**
-* Implement **Spring Security with JWT authentication**
-* Add pagination and filtering
-* Deploy using **Docker and AWS**
-
----
-
-## 👨‍💻 Author
-
-**Vishal Sharma**
-
-* B.Tech CSE (AKTU)
-* Full Stack Developer
-* Interested in Software Engineering and Backend Development
-
----
-
-⭐ If you like this project, please consider giving it a **star** on GitHub!
+Access the OpenAPI documentation in JSON format at:
+[http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
